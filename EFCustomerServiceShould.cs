@@ -173,7 +173,9 @@ namespace MyProject.Tests
             var mockService = new EFCustomerService(mockContext.Object);
             var customer = mockService.Save(mockCustomer);
 
-            Assert.NotNull(customer.Id);
+            ///The assert below should be customer.Id > 0 but since the DBO is mocked, it is not
+            ///implementing the DB's identity functionality
+            Assert.True(customer.Id > -1);
             Assert.Equal(mockCustomer.FirstName, customer.FirstName);
         }
 
